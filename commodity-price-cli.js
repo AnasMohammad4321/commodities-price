@@ -43,4 +43,5 @@ class CommodityCLI {
   }
 }
 
+// Start CLI
 new CommodityCLI().showMenu();
