@@ -2,8 +2,8 @@ name: Send Gold Price Email
 
 on:
   schedule:
-    - cron: "0 * * * *"  # Runs every hour (at minute 0)
-  workflow_dispatch:  # Allows manual execution
+    - cron: "0 * * * *" # Runs every hour (at minute 0)
+  workflow_dispatch: # Allows manual execution
 
 jobs:
   send_email:
@@ -24,7 +24,11 @@ jobs:
       - name: Run email scheduler
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          SERVICE: ${{ secrets.SERVICE }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
         run: node email-scheduler.js
-
