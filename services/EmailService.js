@@ -6,8 +6,8 @@ class EmailService {
     this.transporter = nodemailer.createTransport({
       service: process.env.SMTP_HOST,
       host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT, 10), // Convert to integer
-      secure: process.env.SMTP_PORT === "465", // Secure if using 465, otherwise false
+      port: parseInt(process.env.SMTP_PORT, 10),
+      secure: process.env.SMTP_PORT === "465",
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
@@ -33,6 +33,7 @@ class EmailService {
     try {
       await this.transporter.sendMail(mailOptions);
       console.log("✅ Email sent successfully to:", process.env.EMAIL_TO);
+      process.exit(0);
     } catch (error) {
       console.error("❌ Error sending email:", error.message);
     }
