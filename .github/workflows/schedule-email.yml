@@ -2,8 +2,7 @@ name: Send Gold Price Email
 
 on:
   schedule:
-    # - cron: "0 * * * *" # Runs every hour (at minute 0)
-    cron: "* * * * *" # Runs every minute
+    - cron: "* * * * *" # Runs every minute ✅ (Correct)
   workflow_dispatch: # Allows manual execution
 
 jobs:
