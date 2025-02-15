@@ -1,0 +1,30 @@
+name: Send Gold Price Email
+
+on:
+  schedule:
+    - cron: "0 * * * *"  # Runs every hour (at minute 0)
+  workflow_dispatch:  # Allows manual execution
+
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run email scheduler
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+        run: node email-scheduler.js
+
