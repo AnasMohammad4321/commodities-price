@@ -6,8 +6,8 @@ class EmailService {
     this.transporter = nodemailer.createTransport({
       service: process.env.SMTP_HOST,
       host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      secure: process.env.SMTP_SECURE,
+      port: parseInt(process.env.SMTP_PORT, 10), // Convert to integer
+      secure: process.env.SMTP_PORT === "465", // Secure if using 465, otherwise false
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
